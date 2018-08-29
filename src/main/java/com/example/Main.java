@@ -34,8 +34,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Map;
 
-@Controller
-@SpringBootApplication
+//@Controller
+//@SpringBootApplication
 public class Main {
 
   @Value("${spring.datasource.url}")
