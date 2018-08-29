@@ -17,14 +17,16 @@ import org.springframework.stereotype.Service;
 @Service("clientService")
 public class ClientService {
 
-    private List<Client> lc = new ArrayList<>();
+    private static List<Client> lc = new ArrayList<>();
 
     public List<Client> findAllClients() {
         return lc;
     }
 
     public void saveClient(Client client) {
+        System.out.println("====> sauvegarde du client :" +client);
         lc.add(client);
+        System.out.println("====> contenu de la liste :"+lc);
     }
 
     public void updateClient(Client currentClient) {
@@ -42,6 +44,7 @@ public class ClientService {
 
     public Client findById(long id) {
         Client ctrouve = null;
+        System.out.println("===> recherche dans la liste :"+lc);
         for (Client c : lc) {
             if (c.getId() == id) {
                 break;
