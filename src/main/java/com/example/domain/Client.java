@@ -5,8 +5,12 @@ public class Client {
     private int id;
     private String nom;
     private String prenom;
+    
+    public Client(){
+        
+    }
 
-    Client(int i, String dupont, String jules) {
+    public Client(int i, String dupont, String jules) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
