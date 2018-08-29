@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service("clientService")
 public class ClientService {
 
-    private static List<Client> lc = new ArrayList<>();
+    private  List<Client> lc = new ArrayList<>();
 
     public List<Client> findAllClients() {
         return lc;
@@ -47,6 +47,7 @@ public class ClientService {
         System.out.println("===> recherche dans la liste :"+lc);
         for (Client c : lc) {
             if (c.getId() == id) {
+                ctrouve=c;
                 break;
             }
         }
