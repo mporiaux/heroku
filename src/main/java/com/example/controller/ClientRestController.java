@@ -131,6 +131,10 @@ private ServletContext context;
         clientService.deleteAllClients();
         return new ResponseEntity<Client>(HttpStatus.NO_CONTENT);
     }
- 
+    
+    @Bean 
+    ClientService clientService(){
+        return new ClientService();
+    }
         
 }
