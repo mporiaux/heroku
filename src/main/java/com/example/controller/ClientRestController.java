@@ -132,9 +132,5 @@ private ServletContext context;
         return new ResponseEntity<Client>(HttpStatus.NO_CONTENT);
     }
     
-    @Bean 
-    ClientService clientService(){
-        return new ClientService();
-    }
-        
+          
 }
