@@ -6,15 +6,15 @@ public interface ClientServiceInterface {
 
     void deleteAllClients();
 
-    void deleteClientById(long id);
+    void deleteClientById(int id);
 
     List<Client> findAllClients();
 
-    Client findById(long id);
+    Client findById(int id);
 
     boolean isClientExist(Client client);
 
-    void saveClient(Client client);
+    int saveClient(Client client);
 
     void updateClient(Client currentClient);
     

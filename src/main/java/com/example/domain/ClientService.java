@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
-@Service("clientService")
+//@Service("clientService")
 public class ClientService implements ClientServiceInterface {
 
     private  List<Client> lc = new ArrayList<>();
@@ -21,10 +21,11 @@ public class ClientService implements ClientServiceInterface {
     }
 
     @Override
-    public void saveClient(Client client) {
+    public int saveClient(Client client) {
         System.out.println("====> sauvegarde du client :" +client);
         lc.add(client);
         System.out.println("====> contenu de la liste :"+lc);
+        return client.getId();
     }
 
     @Override
@@ -42,7 +43,7 @@ public class ClientService implements ClientServiceInterface {
     }
 
     @Override
-    public Client findById(long id) {
+    public Client findById(int id) {
         Client ctrouve = null;
         System.out.println("===> recherche dans la liste :"+lc);
         for (Client c : lc) {
@@ -66,7 +67,7 @@ public class ClientService implements ClientServiceInterface {
     }
 
     @Override
-    public void deleteClientById(long id) {
+    public void deleteClientById(int id) {
         Iterator<Client> itc = lc.iterator();
         while (itc.hasNext()) {
              Client c = itc.next();

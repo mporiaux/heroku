@@ -9,7 +9,6 @@ import java.util.List;
 import javax.servlet.ServletContext;
   
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +50,7 @@ private ServletContext context;
     //-------------------Retrieve Single Client--------------------------------------------------------
       
     @RequestMapping(value = "/Client/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<Client> getClient(@PathVariable("id") long id) {
+    public ResponseEntity<Client> getClient(@PathVariable("id") int id) {
         System.out.println("Fetching Client with id " + id);
         Client client = clientService.findById(id);
         if (client == null) {
@@ -74,8 +73,8 @@ private ServletContext context;
             return new ResponseEntity<Client>(client,HttpStatus.CONFLICT);
         }
   
-        clientService.saveClient(client);
-  
+        int id= clientService.saveClient(client);
+        client.setId(id);
         return new ResponseEntity<Client>(client, HttpStatus.CREATED);
     }
   
@@ -103,7 +102,7 @@ private ServletContext context;
     //------------------- Delete a Client --------------------------------------------------------
       
     @RequestMapping(value = "/Client/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Client> deleteClient(@PathVariable("id") long id) {
+    public ResponseEntity<Client> deleteClient(@PathVariable("id") int id) {
         System.out.println("Fetching & Deleting Client with id " + id);
   
         Client client = clientService.findById(id);
