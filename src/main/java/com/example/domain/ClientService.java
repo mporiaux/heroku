@@ -58,7 +58,7 @@ public class ClientService implements ClientServiceInterface {
     public boolean isClientExist(Client client) {
 
         for (Client c : lc) {
-            if (c.getNom().equals(client.getNom()) && client.getPrenom().equals(client.getPrenom())) {
+            if (c.getNom().equals(client.getNom()) && c.getPrenom().equals(client.getPrenom())) {
                 return true;
             }
         }

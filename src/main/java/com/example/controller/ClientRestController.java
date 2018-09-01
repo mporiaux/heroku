@@ -67,7 +67,7 @@ private ServletContext context;
       
     @RequestMapping(value = "/Client/", method = RequestMethod.POST)
     public ResponseEntity<Client> createClient(@RequestBody Client client, UriComponentsBuilder ucBuilder) {
-        System.out.println("Creating Client " + client.getNom()+" "+client.getPrenom());
+        System.out.println("Creating Client "+client.getId()+" " + client.getNom()+" "+client.getPrenom());
   
         if (clientService.isClientExist(client)) {
             System.out.println("A Client with name " + client.getNom() + "  "+client.getPrenom()+" already exist");
