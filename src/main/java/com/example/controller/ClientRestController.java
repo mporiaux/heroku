@@ -82,21 +82,20 @@ private ServletContext context;
       
     //------------------- Update a Client --------------------------------------------------------
       
-    @RequestMapping(value = "/Client/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Client> updateClient(@PathVariable("id") long id, @RequestBody Client client) {
-        System.out.println("Updating Client " + id);
+    @RequestMapping(value = "/Client/", method = RequestMethod.PUT)
+    public ResponseEntity<Client> updateClient(@RequestBody Client client) {
+        System.out.println("Updating Client " + client.getId());
           
-        Client currentClient = clientService.findById(id);
+        Client currentClient = clientService.findById(client.getId());
           
         if (currentClient==null) {
-            System.out.println("Client with id " + id + " not found");
+            System.out.println("Client with id " + client.getId() + " not found");
             return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
         }
   
         currentClient.setNom(client.getNom());
         currentClient.setPrenom(client.getPrenom());
-        currentClient.setId(client.getId());
-          
+                
         clientService.updateClient(currentClient);
         return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
     }
