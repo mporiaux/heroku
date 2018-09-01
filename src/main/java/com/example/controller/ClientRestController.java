@@ -53,12 +53,12 @@ private ServletContext context;
     @RequestMapping(value = "/Client/{id}", method = RequestMethod.GET, produces = {MediaType.APPLICATION_JSON_VALUE,MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Client> getClient(@PathVariable("id") long id) {
         System.out.println("Fetching Client with id " + id);
-        Client Client = clientService.findById(id);
-        if (Client == null) {
+        Client client = clientService.findById(id);
+        if (client == null) {
             System.out.println("Client with id " + id + " not found");
             return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<Client>(Client, HttpStatus.OK);
+        return new ResponseEntity<Client>(client, HttpStatus.OK);
     }
   
       
@@ -66,26 +66,24 @@ private ServletContext context;
     //-------------------Create a Client--------------------------------------------------------
       
     @RequestMapping(value = "/Client/", method = RequestMethod.POST)
-    public ResponseEntity<Void> createClient(@RequestBody Client Client, UriComponentsBuilder ucBuilder) {
-        System.out.println("Creating Client " + Client.getNom()+" "+Client.getPrenom());
+    public ResponseEntity<Client> createClient(@RequestBody Client client, UriComponentsBuilder ucBuilder) {
+        System.out.println("Creating Client " + client.getNom()+" "+client.getPrenom());
   
-        if (clientService.isClientExist(Client)) {
-            System.out.println("A Client with name " + Client.getNom() + "  "+Client.getPrenom()+" already exist");
-            return new ResponseEntity<Void>(HttpStatus.CONFLICT);
+        if (clientService.isClientExist(client)) {
+            System.out.println("A Client with name " + client.getNom() + "  "+client.getPrenom()+" already exist");
+            return new ResponseEntity<Client>(client,HttpStatus.CONFLICT);
         }
   
-        clientService.saveClient(Client);
+        clientService.saveClient(client);
   
-        HttpHeaders headers = new HttpHeaders();
-        headers.setLocation(ucBuilder.path("/Client/{id}").buildAndExpand(Client.getId()).toUri());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<Client>(client, HttpStatus.CREATED);
     }
   
       
     //------------------- Update a Client --------------------------------------------------------
       
     @RequestMapping(value = "/Client/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Client> updateClient(@PathVariable("id") long id, @RequestBody Client Client) {
+    public ResponseEntity<Client> updateClient(@PathVariable("id") long id, @RequestBody Client client) {
         System.out.println("Updating Client " + id);
           
         Client currentClient = clientService.findById(id);
@@ -95,9 +93,9 @@ private ServletContext context;
             return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
         }
   
-        currentClient.setNom(Client.getNom());
-        currentClient.setPrenom(Client.getPrenom());
-        currentClient.setId(Client.getId());
+        currentClient.setNom(client.getNom());
+        currentClient.setPrenom(client.getPrenom());
+        currentClient.setId(client.getId());
           
         clientService.updateClient(currentClient);
         return new ResponseEntity<Client>(currentClient, HttpStatus.OK);
@@ -109,8 +107,8 @@ private ServletContext context;
     public ResponseEntity<Client> deleteClient(@PathVariable("id") long id) {
         System.out.println("Fetching & Deleting Client with id " + id);
   
-        Client Client = clientService.findById(id);
-        if (Client == null) {
+        Client client = clientService.findById(id);
+        if (client == null) {
             System.out.println("Unable to delete. Client with id " + id + " not found");
             return new ResponseEntity<Client>(HttpStatus.NOT_FOUND);
         }
