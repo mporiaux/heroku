@@ -5,13 +5,10 @@
  */
 package com.example.controller;
 import com.example.domain.Client;
-import com.example.domain.ClientService;
 import java.util.List;
 import javax.servlet.ServletContext;
   
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
+import com.example.domain.ClientServiceInterface;
   
 
   
@@ -35,7 +33,7 @@ private ServletContext context;
  
        
     @Autowired
-    ClientService clientService;  //Service which will do all data retrieval/manipulation work
+    ClientServiceInterface clientService;  //Service which will do all data retrieval/manipulation work
   
       
     //-------------------Retrieve All Clients--------------------------------------------------------
