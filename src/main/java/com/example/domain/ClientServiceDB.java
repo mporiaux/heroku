@@ -40,10 +40,11 @@ public class ClientServiceDB implements ClientServiceInterface {
                 String nom = rs.getString("nom");
                 String prenom = rs.getString("prenom");
                 int id = rs.getInt("id");
+                System.out.println("touvé "+id+" "+nom+" "+prenom);
                 lc.add(new Client(id, nom, prenom));
             }
         } catch (Exception e) {
-
+            System.out.println("erreur de recherche de tous les clients "+e);
         }
         return lc;
     }
@@ -79,6 +80,7 @@ public class ClientServiceDB implements ClientServiceInterface {
     @Override
     public Client findById(int id) {
         Client ctrouve = null;
+        System.out.println("recherche de :"+id);
         try (Connection connection = dataSource.getConnection()) {
             PreparedStatement stmt = connection.prepareStatement("select * from client where id = ?");
             stmt.setInt(1, id);
@@ -86,10 +88,12 @@ public class ClientServiceDB implements ClientServiceInterface {
             if (rs.next()) {
                 String nom = rs.getString("nom");
                 String prenom = rs.getString("prenom");
+                System.out.println("trouvé :"+nom+ " "+prenom);
                 ctrouve = new Client(id, nom, prenom);
             }
+            else System.out.println("client introuvable");
         } catch (Exception e) {
-
+            System.out.println("erreur de recherche du client "+id+":"+e);
         }
         return ctrouve;
     }
