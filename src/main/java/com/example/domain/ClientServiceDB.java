@@ -90,7 +90,7 @@ public class ClientServiceDB implements ClientServiceInterface {
                 String nom = rs.getString("nom");
                 String prenom = rs.getString("prenom");
                 System.out.println("trouvé :"+nom+ " "+prenom);
-                
+                ctrouve=new Client(id,nom,prenom);
             }
             else System.out.println("client introuvable");
         } catch (Exception e) {
