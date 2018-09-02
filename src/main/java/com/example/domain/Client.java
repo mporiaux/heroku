@@ -10,9 +10,13 @@ public class Client {
         
     }
 
-    public Client(int i, String dupont, String jules) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Client(int id, String nom, String prenom) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = prenom;
     }
+
+   
 
     /**
      * @return the id

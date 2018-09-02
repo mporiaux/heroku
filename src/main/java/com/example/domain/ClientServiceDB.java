@@ -43,7 +43,7 @@ public class ClientServiceDB implements ClientServiceInterface {
                 System.out.println("touvé "+id+" "+nom+" "+prenom);
                 lc.add(new Client(id, nom, prenom));
             }
-            return lc;
+          
         } catch (Exception e) {
             System.out.println("erreur de recherche de tous les clients "+e);
         }
@@ -90,8 +90,7 @@ public class ClientServiceDB implements ClientServiceInterface {
                 String nom = rs.getString("nom");
                 String prenom = rs.getString("prenom");
                 System.out.println("trouvé :"+nom+ " "+prenom);
-                ctrouve = new Client(id, nom, prenom);
-                return ctrouve;
+                
             }
             else System.out.println("client introuvable");
         } catch (Exception e) {
